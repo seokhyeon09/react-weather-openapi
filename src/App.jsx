@@ -50,7 +50,7 @@ function App() {
   return (
     <div className='app' style={{background:`${bg}`}}>
       <div className='container'>
-        <h1>***의 날씨앱</h1>
+        <h1>정석현의 날씨앱</h1>
         <div className="input-wrap">
           <input
             value={city}
