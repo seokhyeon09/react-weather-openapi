@@ -17,10 +17,10 @@ function App() {
     inputRef.current.focus()
   })
 
-  const bg = useMemo(()=>{
+  const bg = useMemo(() => {
     const weatherId = weather?.weather?.[0].id
-    return getColorByWeatherId(weatherId??0)
-  },[weather])
+    return getColorByWeatherId(weatherId ?? 0)
+  }, [weather])
 
   const handleSearch = async () => {
     //문자열의 공백제거
@@ -31,15 +31,15 @@ function App() {
     try {
       setLoading(true)
       setErr('')
-      const {lat, lon, name, country} = await fetchCoordinates(q)
+      const { lat, lon, name, country } = await fetchCoordinates(q)
       console.log(lat, lon, name, country)
-      const data = await fetchWeatherByCoords(lat,lon)
+      const data = await fetchWeatherByCoords(lat, lon)
       console.log(data)
       setWeather(data)
       setCity('')
     } catch (error) {
       setErr(error)
-    }finally{
+    } finally {
       setLoading(false)
     }
   }
@@ -48,7 +48,12 @@ function App() {
     if (e.key === 'Enter') handleSearch()
   }
   return (
-    <div className='app' style={{background:`${bg}`}}>
+    <div className='app' style={{
+      backgroundImage: `url(${bg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}>
       <div className='container'>
         <h1>정석현의 날씨앱</h1>
         <div className="input-wrap">
@@ -68,7 +73,7 @@ function App() {
         </div>
         {err && <p>{err}</p>}
         {loading && <p>불러오는 중...</p>}
-        <WeatherCard weather={weather}/>
+        <WeatherCard weather={weather} />
       </div>
     </div>
   )
